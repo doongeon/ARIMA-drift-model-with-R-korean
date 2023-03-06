@@ -8,7 +8,7 @@ https://www.youtube.com/watch?v=JITO5-bYxu8 참고한 자료
  
 data
   Year No_Smoothing Lowess.5.
-1 1880        -0.17     -0.10
+1 1880        -0.17     -0.10 \n
 2 1881        -0.09     -0.13
 3 1882        -0.11     -0.17
 4 1883        -0.18     -0.20
