@@ -1,21 +1,23 @@
 # Annual average global temperature analysis
+## basic ARIMA fitting with R
 
 donggeon
 2022-12-08
 
 참고한 자료
  - https://www.youtube.com/watch?v=JITO5-bYxu8 ( arima with drift )
+
+분석내용은 코드에 더 자세히 설명되어 있습니다.
  
+### 분석
 
-## 분석
-
-자료 확인
+- 자료 확인
 
 ![image](https://user-images.githubusercontent.com/87890694/223037491-38020e78-110f-4f43-bff2-60613a51b901.png)
 
 
 
-ACF, PACF 확인
+- ACF, PACF 확인
 
 ![image](https://user-images.githubusercontent.com/87890694/223037534-63cb9172-73cf-4592-8643-1ea12e25dc46.png)
 
@@ -25,7 +27,7 @@ ACF가 천천히 감소하는 모습을 보인다. 확률 보행의 양상을 �
 
 
 
-ADF-test
+- ADF-test
 
 
 ![image](https://user-images.githubusercontent.com/87890694/223038091-90348560-8f90-49fa-ba5d-c9f2af46d536.png)
@@ -60,13 +62,13 @@ $p=1, q=6$ 일때 추정치가 모두 유의하고 AIC가 가장 낮음. 잠정�
 ![image](https://user-images.githubusercontent.com/87890694/223040186-2298b357-9a74-4b1b-ba39-e306b3d54321.png)
 
 
-## 잔차분석
+### 잔차분석
 
-잔차그림
+- 잔차그림
 
 ![image](https://user-images.githubusercontent.com/87890694/223041104-e71f57fa-6bb3-4cfe-80f4-8f64e81bb783.png)
 
-잔차의 ACF, PACF
+- 잔차의 ACF, PACF
 
 ![image](https://user-images.githubusercontent.com/87890694/223041140-83a9388f-b257-43fc-ace2-97fd88e608f3.png)
 
@@ -74,6 +76,8 @@ $p=1, q=6$ 일때 추정치가 모두 유의하고 AIC가 가장 낮음. 잠정�
 
 SACF, SPACF도 W.N.의 모습을 보인다.
 
+- Ljung–Box test
+ 
 ![image](https://user-images.githubusercontent.com/87890694/223041454-46b6799f-dc8b-465e-ba53-8312f0fcedbd.png)
 
 박스 테스트 결과 $H_0$를 기각하지 못함. ($H_0$ : The data are independently distributed)
@@ -85,7 +89,7 @@ SACF, SPACF도 W.N.의 모습을 보인다.
 ![image](https://user-images.githubusercontent.com/87890694/223041775-320715be-e4ea-47ba-9ed4-3ddcf497eddd.png)
 
 
-## 예측
+### 예측
 
 ![image](https://user-images.githubusercontent.com/87890694/223041830-62179b7f-ac4a-4080-bd27-374b467cfa2c.png)
 
