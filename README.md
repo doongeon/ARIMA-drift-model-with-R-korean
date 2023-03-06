@@ -9,7 +9,10 @@ donggeon
  - https://www.youtube.com/watch?v=JITO5-bYxu8 ( arima with drift )
  
 
+## 분석
+
 자료 확인
+
 ![image](https://user-images.githubusercontent.com/87890694/223037491-38020e78-110f-4f43-bff2-60613a51b901.png)
 
 
@@ -17,6 +20,7 @@ donggeon
 ACF, PACF 확인
 
 ![image](https://user-images.githubusercontent.com/87890694/223037534-63cb9172-73cf-4592-8643-1ea12e25dc46.png)
+
 ACF가 천천히 감소하는 모습을 보인다. 확률 보행의 양상을 보임
 
 단위근이 있다고 판단하여 ADF-test를 진행하여 적절한 모델을 찾기로 함
@@ -24,6 +28,8 @@ ACF가 천천히 감소하는 모습을 보인다. 확률 보행의 양상을 �
 
 
 ADF-test
+
+
 ![image](https://user-images.githubusercontent.com/87890694/223038091-90348560-8f90-49fa-ba5d-c9f2af46d536.png)
 
 adf test 결과 모든 타입에서 H0를 기각하지 못하였고,
