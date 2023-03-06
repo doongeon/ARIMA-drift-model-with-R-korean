@@ -5,79 +5,63 @@ donggeon
 2022-12-08
 https://www.youtube.com/watch?v=JITO5-bYxu8 참고한 자료
  - arima with drift
-library(aTSA)
-## 
-## Attaching package: 'aTSA'
-## The following object is masked from 'package:graphics':
-## 
-##     identify
-library(forecast)
-## Warning: package 'forecast' was built under R version 4.1.3
-## Registered S3 method overwritten by 'quantmod':
-##   method            from
-##   as.zoo.data.frame zoo
-## 
-## Attaching package: 'forecast'
-## The following object is masked from 'package:aTSA':
-## 
-##     forecast
-# 파일 불러오기
-gt <- read.csv('globalTemp.csv')
-head(gt)
-##   Year No_Smoothing Lowess.5.
-## 1 1880        -0.17     -0.10
-## 2 1881        -0.09     -0.13
-## 3 1882        -0.11     -0.17
-## 4 1883        -0.18     -0.20
-## 5 1884        -0.28     -0.24
-## 6 1885        -0.33     -0.26
-#2번째 칼럼 저장
-
-X <- gt$Lowess.5.
-자료 확인
-layout(1)
-ts.plot(X)
+ 
+data
+  Year No_Smoothing Lowess.5.
+1 1880        -0.17     -0.10
+2 1881        -0.09     -0.13
+3 1882        -0.11     -0.17
+4 1883        -0.18     -0.20
+5 1884        -0.28     -0.24
+6 1885        -0.33     -0.26
 
 
-layout(t(1:2))
-acf(X, lag.max = 48)
-pacf(X, lag.max = 48)
+visualization
+![image](https://user-images.githubusercontent.com/87890694/223017666-6deb74e7-aa4d-46cc-888b-39179151bd26.png)
+
+
+
+check ACF, PACF
+![image](https://user-images.githubusercontent.com/87890694/223017814-8036de75-e68f-41a9-84e1-43c033055f0a.png)
 
 
 단위근 검정
 adf.test(X)
-## Augmented Dickey-Fuller Test 
-## alternative: stationary 
-##  
-## Type 1: no drift no trend 
-##      lag   ADF p.value
-## [1,]   0 4.722   0.990
-## [2,]   1 0.226   0.708
-## [3,]   2 0.858   0.889
-## [4,]   3 1.497   0.965
-## [5,]   4 1.229   0.942
-## Type 2: with drift no trend 
-##      lag   ADF p.value
-## [1,]   0 4.373   0.990
-## [2,]   1 0.227   0.973
-## [3,]   2 0.914   0.990
-## [4,]   3 1.649   0.990
-## [5,]   4 1.499   0.990
-## Type 3: with drift and trend 
-##      lag    ADF p.value
-## [1,]   0 -1.167   0.909
-## [2,]   1 -2.114   0.525
-## [3,]   2 -1.401   0.825
-## [4,]   3 -1.050   0.927
-## [5,]   4 -0.786   0.961
-## ---- 
-## Note: in fact, p.value = 0.01 means p.value <= 0.01
+ Augmented Dickey-Fuller Test 
+ alternative: stationary 
+  
+ Type 1: no drift no trend 
+      lag   ADF p.value
+ [1,]   0 4.722   0.990
+ [2,]   1 0.226   0.708
+ [3,]   2 0.858   0.889
+ [4,]   3 1.497   0.965
+ [5,]   4 1.229   0.942
+ Type 2: with drift no trend 
+      lag   ADF p.value
+ [1,]   0 4.373   0.990
+ [2,]   1 0.227   0.973
+ [3,]   2 0.914   0.990
+ [4,]   3 1.649   0.990
+ [5,]   4 1.499   0.990
+ Type 3: with drift and trend 
+      lag    ADF p.value
+ [1,]   0 -1.167   0.909
+ [2,]   1 -2.114   0.525
+ [3,]   2 -1.401   0.825
+ [4,]   3 -1.050   0.927
+ [5,]   4 -0.786   0.961
+ ---- 
+ Note: in fact, p.value = 0.01 means p.value <= 0.01
 adf test 결과 모든 타입에서 H0를 기각하지 못함
-시계열 자료의 그림이 이차곡선으로 보임
-  -> 가능한 모형
+시계열 자료의 그림이 이차곡선으로 생각된다
+3가지 타입의 모형이 모두 가능하지만, 지수적으로 증가한다고 판단
+  -> 잠정 모형
     with drift and trend 
-자료의 시계열 그림을 보니 3번 모형이 가장 적합해 보임
+    
 모형 : pi(B) * (1-B)^d * (Y.t - mu) = d + theta(B) * W.t
+
+
 aic 기준으로 p,q 선정
 aic <- 1000
 aic.temp <- aic
@@ -89,20 +73,20 @@ for(p in 0:2) for(q in 0:7)
     cat('p =', p, 'q =', q, ' AIC = ', aic.temp, '\n')
   }
 }
-## p = 0 q = 0  AIC =  -121.656 
-## p = 0 q = 1  AIC =  -297.6549 
-## p = 0 q = 2  AIC =  -458.9174 
-## p = 0 q = 3  AIC =  -561.3216 
-## p = 0 q = 4  AIC =  -665.525 
-## p = 0 q = 5  AIC =  -691.9151 
-## p = 0 q = 6  AIC =  -748.1238 
-## p = 0 q = 7  AIC =  -786.9604 
-## p = 1 q = 2  AIC =  -841.8223 
-## p = 1 q = 3  AIC =  -849.1681 
-## p = 1 q = 4  AIC =  -852.0681 
-## p = 1 q = 5  AIC =  -864.0042 
-## p = 1 q = 6  AIC =  -872.6625 
-## p = 1 q = 7  AIC =  -879.3751
+ p = 0 q = 0  AIC =  -121.656 
+ p = 0 q = 1  AIC =  -297.6549 
+ p = 0 q = 2  AIC =  -458.9174 
+ p = 0 q = 3  AIC =  -561.3216 
+ p = 0 q = 4  AIC =  -665.525 
+ p = 0 q = 5  AIC =  -691.9151 
+ p = 0 q = 6  AIC =  -748.1238 
+ p = 0 q = 7  AIC =  -786.9604 
+ p = 1 q = 2  AIC =  -841.8223 
+ p = 1 q = 3  AIC =  -849.1681 
+ p = 1 q = 4  AIC =  -852.0681 
+ p = 1 q = 5  AIC =  -864.0042 
+ p = 1 q = 6  AIC =  -872.6625 
+ p = 1 q = 7  AIC =  -879.3751
 AIC가 가장 낮은 (1,0,7) 선택
 
 추정치가 유의하지 않음
@@ -123,6 +107,8 @@ fit
 ## AIC=-879.38   AICc=-877.34   BIC=-846.86
 p=1, q=6 일때 추정치가 모두 유의하고 AIC가 가장 낮음
 잠정모델로 결정
+
+
 fit <- Arima(X, order = c(1,0,6), xreg = 1:length(X))
 fit
 ## Series: X 
@@ -135,6 +121,8 @@ fit
 ## 
 ## sigma^2 = 0.0001076:  log likelihood = 446.33
 ## AIC=-872.66   AICc=-870.98   BIC=-843.1
+
+
 잔차분석
 res <- fit$res
 
