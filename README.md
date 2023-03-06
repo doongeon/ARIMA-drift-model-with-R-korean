@@ -1,5 +1,5 @@
-# Annual average global temperature analysis
-## basic ARIMA fitting with R
+# ARIMA-drift-model-with-R-korean
+## 드리프트가 있는 ARIMA 모델 
 ![image](https://user-images.githubusercontent.com/87890694/223041830-62179b7f-ac4a-4080-bd27-374b467cfa2c.png)
 
 donggeon
