@@ -1,5 +1,6 @@
 # Annual average global temperature analysis
 ## basic ARIMA fitting with R
+![image](https://user-images.githubusercontent.com/87890694/223041830-62179b7f-ac4a-4080-bd27-374b467cfa2c.png)
 
 donggeon
 2022-12-08
@@ -89,9 +90,7 @@ SACF, SPACF도 W.N.의 모습을 보인다.
 ![image](https://user-images.githubusercontent.com/87890694/223041775-320715be-e4ea-47ba-9ed4-3ddcf497eddd.png)
 
 
-### 예측
 
-![image](https://user-images.githubusercontent.com/87890694/223041830-62179b7f-ac4a-4080-bd27-374b467cfa2c.png)
 
 
 
