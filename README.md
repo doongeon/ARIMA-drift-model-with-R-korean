@@ -5,16 +5,6 @@ donggeon
 2022-12-08
 https://www.youtube.com/watch?v=JITO5-bYxu8 참고한 자료
  - arima with drift
- 
-data
-  Year No_Smoothing Lowess.5.
-1 1880        -0.17     -0.10 \n
-2 1881        -0.09     -0.13
-3 1882        -0.11     -0.17
-4 1883        -0.18     -0.20
-5 1884        -0.28     -0.24
-6 1885        -0.33     -0.26
-
 
 visualization
 ![image](https://user-images.githubusercontent.com/87890694/223017666-6deb74e7-aa4d-46cc-888b-39179151bd26.png)
@@ -92,19 +82,9 @@ AIC가 가장 낮은 (1,0,7) 선택
 추정치가 유의하지 않음
 fit <- Arima(X, order = c(1,0,7), xreg = 1:length(X))
 fit
-## Series: X 
-## Regression with ARIMA(1,0,7) errors 
-## 
-## Coefficients:
-##          ar1     ma1     ma2     ma3     ma4     ma5     ma6      ma7
-##       0.9770  0.9433  1.0485  0.8675  0.9506  0.5279  0.0323  -0.2991
-## s.e.  0.0202  0.0901  0.1259  0.1645  0.1766  0.1644  0.1345   0.0937
-##       intercept    xreg
-##         -0.2976  0.0071
-## s.e.     0.2264  0.0022
-## 
-## sigma^2 = 9.906e-05:  log likelihood = 450.69
-## AIC=-879.38   AICc=-877.34   BIC=-846.86
+ Series: X 
+ Regression with ARIMA(1,0,7) errors 
+
 p=1, q=6 일때 추정치가 모두 유의하고 AIC가 가장 낮음
 잠정모델로 결정
 
